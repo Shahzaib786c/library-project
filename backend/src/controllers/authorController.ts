@@ -1,13 +1,11 @@
 import { Request, Response } from "express";
 import prisma from "../prisma.js";
 
-// GET /api/authors
 export async function getAuthors(req: Request, res: Response) {
   const authors = await prisma.author.findMany();
   res.status(200).json(authors);
 }
 
-// GET /api/authors/:id  — author ke saath uski saari books
 export async function getAuthor(req: Request, res: Response) {
   const author = await prisma.author.findUnique({
     where: { id: Number(req.params.id) },
@@ -21,7 +19,6 @@ export async function getAuthor(req: Request, res: Response) {
   res.status(200).json(author);
 }
 
-// POST /api/authors
 export async function addAuthor(req: Request, res: Response) {
   const { name, country } = req.body;
 
@@ -36,7 +33,6 @@ export async function addAuthor(req: Request, res: Response) {
   res.status(201).json(author);
 }
 
-// PUT /api/authors/:id
 export async function updateAuthor(req: Request, res: Response) {
   try {
     const author = await prisma.author.update({
@@ -49,7 +45,6 @@ export async function updateAuthor(req: Request, res: Response) {
   }
 }
 
-// DELETE /api/authors/:id
 export async function deleteAuthor(req: Request, res: Response) {
   try {
     await prisma.author.delete({

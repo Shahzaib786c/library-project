@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import prisma from "../prisma.js";
 
-// GET /api/books  — har book ke saath uska author
 export async function getBooks(req: Request, res: Response) {
   const books = await prisma.book.findMany({
     include: { author: true }
@@ -9,7 +8,6 @@ export async function getBooks(req: Request, res: Response) {
   res.status(200).json(books);
 }
 
-// GET /api/books/:id
 export async function getBook(req: Request, res: Response) {
   const book = await prisma.book.findUnique({
     where: { id: Number(req.params.id) },
@@ -23,7 +21,6 @@ export async function getBook(req: Request, res: Response) {
   res.status(200).json(book);
 }
 
-// POST /api/books
 export async function addBook(req: Request, res: Response) {
   const { title, year, authorId } = req.body;
 
@@ -45,7 +42,6 @@ export async function addBook(req: Request, res: Response) {
   }
 }
 
-// PUT /api/books/:id
 export async function updateBook(req: Request, res: Response) {
   try {
     const book = await prisma.book.update({
@@ -58,7 +54,6 @@ export async function updateBook(req: Request, res: Response) {
   }
 }
 
-// DELETE /api/books/:id
 export async function deleteBook(req: Request, res: Response) {
   try {
     await prisma.book.delete({

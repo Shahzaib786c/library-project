@@ -4,7 +4,6 @@ import { api } from "./api";
 function AdminPanel({ currentUserId }) {
   const [users, setUsers] = useState([]);
 
-  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => {
     loadUsers();
   }, []);

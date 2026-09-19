@@ -5,7 +5,6 @@ import prisma from "../prisma.js";
 
 const JWT_SECRET = process.env.JWT_SECRET || "fallback-secret";
 
-// POST /api/auth/register
 export async function register(req: Request, res: Response) {
     const { name, email, password } = req.body;
 
@@ -18,14 +17,12 @@ export async function register(req: Request, res: Response) {
     }
 
     try {
-        // password ko hash karo — plain text kabhi save nahi hota
         const hashed = await bcrypt.hash(password, 10);
 
         const user = await prisma.user.create({
             data: { name, email, password: hashed }
         });
 
-        // response mein password wapas mat bhejo
         res.status(201).json({
             id: user.id,
             name: user.name,
@@ -33,12 +30,10 @@ export async function register(req: Request, res: Response) {
             role: user.role
         });
     } catch (error) {
-        // @unique ki wajah se MySQL duplicate email reject karta hai
         res.status(400).json({ message: "Email already registered" });
     }
 }
 
-// POST /api/auth/login
 export async function login(req: Request, res: Response) {
     const { email, password } = req.body;
 
@@ -48,7 +43,6 @@ export async function login(req: Request, res: Response) {
 
     const user = await prisma.user.findUnique({ where: { email } });
 
-    // email ghalat ho ya password — paigham ek hi rakho
     if (!user) {
         return res.status(401).json({ message: "Invalid email or password" });
     }
@@ -63,7 +57,6 @@ export async function login(req: Request, res: Response) {
         return res.status(403).json({ message: "Your account has been blocked" });
     }
 
-    // token banao
     const token = jwt.sign(
         { id: user.id, role: user.role },
         JWT_SECRET,
@@ -81,7 +74,6 @@ export async function login(req: Request, res: Response) {
     });
 }
 
-// GET /api/auth/me  — token se apni info
 export async function getMe(req: Request, res: Response) {
     const userId = (req as any).userId;
 

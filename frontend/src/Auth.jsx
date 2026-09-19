@@ -21,12 +21,10 @@ function Auth({ onLogin }) {
       } else {
         await api.register({ name, email, password });
 
-        // Register does not return a token — the user must log in.
         setMessage("Account created successfully. Please log in.");
         setIsLogin(true);
         setName("");
         setPassword("");
-        // Email is kept so the user does not have to retype it.
       }
     } catch (err) {
       setError(err.message);

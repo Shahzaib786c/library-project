@@ -4,7 +4,6 @@ function getToken() {
     return localStorage.getItem("token");
 }
 
-// har request ke liye headers
 function headers() {
     const token = getToken();
     return {
