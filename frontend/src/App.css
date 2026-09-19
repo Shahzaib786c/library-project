@@ -2,7 +2,6 @@
   max-width: 700px;
   margin: 40px auto;
   padding: 0 20px;
-  font-family: system-ui, sans-serif;
   text-align: left;
 }
 
@@ -37,6 +36,19 @@ select {
   font-size: 14px;
 }
 
+section input {
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.row input,
+.row select {
+  display: inline-block;
+  width: auto;
+  margin-bottom: 0;
+}
+
 button {
   padding: 8px 14px;
   border: none;
@@ -64,4 +76,85 @@ li {
 li button {
   background: #ef4444;
   padding: 4px 10px;
+}
+
+.error {
+  color: #ef4444;
+  font-size: 14px;
+  margin: 8px 0;
+}
+
+.success {
+  color: #10b981;
+  font-size: 14px;
+  margin: 8px 0;
+}
+
+.switch {
+  color: #3b82f6;
+  cursor: pointer;
+  font-size: 14px;
+  margin-top: 12px;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.badge {
+  background: #10b981;
+  color: white;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  margin-left: 6px;
+}
+
+table.users {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+table.users th,
+table.users td {
+  text-align: left;
+  padding: 8px 6px;
+  border-bottom: 1px solid #eee;
+}
+
+table.users th {
+  font-weight: 600;
+  color: #666;
+}
+
+.ok {
+  color: #10b981;
+  font-weight: 600;
+}
+
+.blocked {
+  color: #ef4444;
+  font-weight: 600;
+}
+
+.you {
+  background: #e5e7eb;
+  color: #374151;
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-size: 11px;
+  margin-left: 6px;
+}
+
+button.danger {
+  background: #ef4444;
+}
+
+table.users select {
+  padding: 4px;
+  font-size: 13px;
 }
